@@ -53,33 +53,37 @@ export const NewTransactionTypeContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+`;
 
-  button {
-    height: 4rem;
-    border: 1px solid #d7d7d7;
-    border-radius: 0.25rem;
-    background: transparent;
+interface TypeBoxProps {
+  isActive: boolean;
+}
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const TypeBox = styled.button<TypeBoxProps>`
+  height: 4rem;
+  border: 1px solid #d7d7d7;
+  border-radius: 0.25rem;
+  background: ${(props) => props.isActive ? '#aaa' : 'transparent'};
 
-    transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-      border-color: ${darken(0.15, '#d7d7d7')};
-    }
+  transition: border-color 0.2s;
 
-    img {
-      width: 25px;
-      height: 25px;
-    }
+  &:hover {
+    border-color: ${darken(0.15, "#d7d7d7")};
+  }
 
-    span {
-      display: inline-block;
-      margin-left: 1rem;
-      font-size: 1rem;
-      color: var(--text-title);
-    }
+  img {
+    width: 25px;
+    height: 25px;
+  }
+
+  span {
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 1rem;
+    color: var(--text-title);
   }
 `;
