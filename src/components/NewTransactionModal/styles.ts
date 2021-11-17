@@ -57,7 +57,7 @@ export const NewTransactionTypeContainer = styled.div`
 
 interface TypeBoxProps {
   isActive: boolean;
-  activeColor: "green" | "red";
+  activeColor: keyof typeof colors;
 }
 
 const colors = {
