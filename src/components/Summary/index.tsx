@@ -9,6 +9,24 @@ import { Container } from "./styles";
 export function Summary() {
   const { transactions } = useContext(TransactionsContext);
 
+  const summary = transactions.reduce(
+    (a, transaction) => {
+      if (transaction.type === "deposit") {
+        a.deposits += transaction.amount;
+        a.balance += transaction.amount;
+      } else {
+        a.withdraws += transaction.amount;
+        a.balance -= transaction.amount;
+      }
+      return a;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      balance: 0,
+    }
+  );
+
   return (
     <Container>
       <div>
@@ -16,7 +34,12 @@ export function Summary() {
           <p>Income</p>
           <img src={incomeImg} alt='Income' />
         </header>
-        <strong>$4000,00</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.deposits)}
+        </strong>
       </div>
 
       <div>
@@ -24,7 +47,13 @@ export function Summary() {
           <p>Expenses</p>
           <img src={outlayImg} alt='Outlay' />
         </header>
-        <strong>- $1100,00</strong>
+        <strong>
+          -{" "}
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.withdraws)}
+        </strong>
       </div>
 
       <div className='highlight-background'>
@@ -32,7 +61,12 @@ export function Summary() {
           <p>Balance</p>
           <img src={totalImg} alt='Total' />
         </header>
-        <strong>$2900,00</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.balance)}
+        </strong>
       </div>
     </Container>
   );
